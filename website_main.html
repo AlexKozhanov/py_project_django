@@ -3,27 +3,12 @@
 <head>
     <meta charset="UTF-8"> <!-- Кодировка страницы -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сайт</title> <!-- Заголовок -->
+    <title>Главная</title> <!-- Заголовок -->
     <link rel="stylesheet" href="static/css/bootstrap.min.css"> <!-- Подключение локальных файлов стилей Bootstrap -->
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Марк Отто, Джейкоб Торнтон и контрибьюторы Bootstrap">
     <meta name="generator" content="Hugo 0.145.0">
-    <title>Sidebars · Bootstrap v5.3</title>
 
-    <link rel="canonical" href="https://getbootstrap.su/docs/5.3/examples/sidebars/">
-
-    <script src="#"></script>
-
-    <link href="#" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7">
-
-    <link rel="apple-touch-icon" href="https://getbootstrap.su/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-    <link rel="icon" href="https://getbootstrap.su/docs/5.3/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="https://getbootstrap.su/docs/5.3/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-    <link rel="manifest" href="https://getbootstrap.su/docs/5.3/assets/img/favicons/manifest.json">
-    <link rel="mask-icon" href="https://getbootstrap.su/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
-    <link rel="icon" href="https://getbootstrap.su/docs/5.3/assets/img/favicons/favicon.ico">
     <meta name="theme-color" content="#712cf9">
 
     <style>
@@ -111,53 +96,45 @@
     </style>
 
 </head>
-
-<!-- Раздел2 Категории -->
-<!-- Раздел3 Заказы -->
-<!-- Раздел4 контакты -->
 <!-- Заголовок на странице -->
-<!-- Внутренности1 Главная -->
-<!-- Внутренности2 Каталог -->
-<!-- Внутренности3  -->
-<!-- Внутренности1 Главная -->
 <body> <!-- Тело страницы -->
 <main class="d-flex flex-nowrap">
     <h1 class="visually-hidden">my_html</h1>
     <!-- Боковая панель -->
     <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 240px;">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-          <svg class="bi pe-none me-2" width="40" height="32" aria-hidden="true"><use xlink:href="#bootstrap"></use></svg>
+        <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+          <img src="/static/icons/bootstrap.svg" alt="Bootstrap" width="32" height="32">
           <span class="fs-4">Боковая панель</span>
         </a>
         <hr> <!-- Разделитель -->
+        <!-- Список сайтов -->
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-                <a href="#" class="nav-link active" aria-current="page">
+                <a href="website_main.html" class="nav-link active" aria-current="page">
                     <img src="/static/icons/bootstrap.svg" alt="Bootstrap" width="32" height="32">
                     Главная
                 </a>
-
             </li>
             <li>
-                <a href="#" class="nav-link link-body-emphasis">
+                <a href="website_catalog.html" class="nav-link link-body-emphasis">
                     <img src="/static/icons/bootstrap.svg" alt="Bootstrap" width="32" height="32">
-                    Категории
+                    Каталог
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link link-body-emphasis">
+                <a href="website_order.html" class="nav-link link-body-emphasis">
                     <img src="/static/icons/bootstrap.svg" alt="Bootstrap" width="32" height="32">
                     Заказы
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link link-body-emphasis">
+                <a href="website_contacts.html" class="nav-link link-body-emphasis">
                     <img src="/static/icons/bootstrap.svg" alt="Bootstrap" width="32" height="32">
                     Контакты
                 </a>
             </li>
         </ul>
-        <hr>
+        <hr> <!-- Выпадающий список -->
         <div class="dropdown">
             <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="static/img/cat.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
@@ -174,65 +151,47 @@
     <!-- Разделитель вертикальный -->
     <div class="b-example-divider b-example-vr"></div>
     <!-- Раздел1 Главная -->
-    <div>
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Кнопка выпадающего списка
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Действие</a></li>
-            <li><a class="dropdown-item" href="#">Другое действие</a></li>
-            <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>
-          </ul>
-        </div>
+    <div class="container px-4 py-5" id="featured-3"> <!-- container с текстами -->
+        <h2 class="pb-2 border-bottom text-center">Columns with icons</h2>
+        <p class="lead text-center">Ваши ежедневные новости и истории</p>
 
-        <div class="container px-4 py-5" id="featured-3"> <!-- container с текстами -->
-            <h2 class="pb-2 border-bottom">Columns with icons</h2>
-            <div class="row g-4 py-5 row-cols-1 row-cols-lg-3"> <!-- Основной блок для работы с колонками -->
-                <div class="card">
-                  <h5 class="card-header">Рекомендуемые</h5>
-                  <div class="card-body">
-                    <h5 class="card-title">Особое обращение с заголовком</h5>
-                    <p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному контенту.</p>
+        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3"> <!-- Основной блок для работы с колонками -->
+            <div class="card">
+              <h5 class="card-header text-center">Рекомендуемые</h5>
+              <div class="card-body">
+                <h5 class="card-title text-center">Особое обращение с заголовком</h5>
+                <p class="card-text text-center">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному контенту.</p>
+                <div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">
                     <a href="#" class="btn btn-primary">Перейти куда-нибудь</a>
-                  </div>
                 </div>
-                <div class="card">
-                  <h5 class="card-header">Рекомендуемые</h5>
-                  <div class="card-body">
-                    <h5 class="card-title">Особое обращение с заголовком</h5>
-                    <p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному контенту.</p>
-                    <a href="#" class="btn btn-primary">Перейти куда-нибудь</a>
-                  </div>
-                </div>
-                <div class="card">
-                  <h5 class="card-header">Рекомендуемые</h5>
-                  <div class="card-body">
-                    <h5 class="card-title">Особое обращение с заголовком</h5>
-                    <p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному контенту.</p>
-                    <a href="#" class="btn btn-primary">Перейти куда-нибудь</a>
-                  </div>
-                </div>
-                <div class="card">
-                    <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-                        <img src="static/icons/collection.svg" alt="" width="32" height="32" class="rounded-circle me-2">
-                    </div>
-                    <h3 class="fs-2 text-body-emphasis">Featured title</h3>
-                    <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                    <a href="#" class="icon-link">
-                        Call to action
-                        <svg class="bi" aria-hidden="true"><use xlink:href="#chevron-right"></use></svg>
-                    </a>
-                </div>
+              </div>
             </div>
+            <div class="card">
+              <h5 class="card-header">Рекомендуемые</h5>
+              <div class="card-body">
+                <h5 class="card-title">Особое обращение с заголовком</h5>
+                <p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному контенту.</p>
+                <div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">
+                    <a href="#" class="btn btn-primary">Перейти куда-нибудь</a>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <h5 class="card-header">Рекомендуемые</h5>
+              <div class="card-body">
+                <h5 class="card-title">Особое обращение с заголовком</h5>
+                <p class="card-text">С вспомогательным текстом ниже в качестве естественного перехода к дополнительному контенту.</p>
+                <div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">
+                    <a href="#" class="btn btn-primary">Перейти куда-нибудь</a>
+                </div>
+              </div>
+            </div>
+
         </div>
     </div>
 </main>
-
     <!-- Подключение локальных файлов JS Bootstrap -->
     <script src="/static/js/bootstrap.bundle.min.js"></script>
-<!--    <script src="/static/js/bootstrap.esm.min.js"></script>-->
-<!--    <script src="/static/js/bootstrap.min.js"></script>-->
     <script src="/static/js/sidebars.js"></script>
 </body>
 </html>
