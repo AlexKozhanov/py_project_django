@@ -97,15 +97,22 @@
         <p class="lead text-center">Ваши контакты, сир</p>
 
         <div class="row g-4 py-5 row-cols-1 row-cols-lg-2">
-            <div class="card">
-                <label for="exampleInputEmail1" class="form-label">Почта</label>
-                <input placeholder="email@yandex.ru" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text mb-3">Введите почту</div>
-                <label for="exampleInputPassword1" class="form-label">Имя</label>
-                <input placeholder="Иван Иванов" type="text" class="form-control mb-3" id="exampleInputPassword1">
-                <label for="exampleFormControlTextarea1" class="form-label">Пример текстового поля</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
+            <form method="post" action="">
+                {% csrf_token %}
+                <div class="card">
+                    <label for="exampleInputEmail1" class="form-label">Почта</label>
+                    <input placeholder="email@yandex.ru" type="email" class="form-control" id="exampleInputEmail1" name="mail" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text mb-3">Введите почту</div>
+
+                    <label for="exampleInputPassword1" class="form-label">Имя</label>
+                    <input placeholder="Иван Иванов" type="text" class="form-control mb-3" id="exampleInputPassword1" name="name">
+
+                    <label for="exampleFormControlTextarea1" class="form-label">Пример текстового поля</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" name="text" rows="3"></textarea>
+
+                    <button type="submit">Отправить</button>
+                </div>
+            </form>
 
             <div class="mb-3">
                   <h5 class="card-header mb-3">Рекомендуемые</h5>

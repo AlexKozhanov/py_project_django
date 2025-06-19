@@ -4,7 +4,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-%zrbokc$1d%#)09rxzy$38u1_w32)dyg17q==!$x#cp5l)6+re'
 
-DEBUG = True
+DEBUG = True # cntr+C после изменений и сервер сам перезапустится
 
 ALLOWED_HOSTS = []
 
