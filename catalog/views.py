@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+from django.views.generic import ListView, DetailView
 
 from catalog.models import Product
 
@@ -16,12 +17,11 @@ def contacts(request):
         return HttpResponse(f"Спасибо, {name}! Сообщение получено с текстом '{text}'. Мы свяжемся с вами по почте {mail}")
     return render(request, 'catalog/contacts.html')
 
-def catalog(request):
-    products = Product.objects.all()
-    context = {"products": products}
-    return render(request, 'catalog/catalog.html', context)
+class CatalogListView(ListView):
+    model = Product
 
-def product_detail(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    context = {"product": product}
-    return render(request, 'catalog/product_detail.html', context)
+class CataDetailListView(DetailView):
+    model = Product
+
+    # app_name/<modul_name>_<action>
+    #catalog/product_detail.html

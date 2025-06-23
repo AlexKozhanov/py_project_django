@@ -7,7 +7,7 @@
     <p class="lead text-center">Ваши ежедневные новости и истории</p>
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
-        {% for product in products %}
+        {% for product in object_list %}
         <div class="col">
             <div class="card shadow-sm">
 <!--                <svg aria-label="Placeholder: Thumbnail" class="bd-placeholder-img card-img-top" height="225" preserveAspectRatio="xMidYMid slice" role="img" width="100%">-->
@@ -23,7 +23,6 @@
                         <div class="btn-group">
                             <a class="btn btn-primary" href="{% url 'catalog:product_detail' product.pk %}" role="button">Подробнее</a>
                         </div>
-                        <small class="text-body-secondary">9 mins</small>
                     </div>
                 </div>
             </div>
