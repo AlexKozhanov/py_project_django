@@ -23,7 +23,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name='Название', help_text='Введите название продукта')
     description = models.TextField(blank=True, null=True, max_length=100, verbose_name='Описание',
                                    help_text='Введите описание продукта')
-    png = models.ImageField(upload_to='static/img', blank=True, null=True, verbose_name='Фото',
+    png = models.ImageField(upload_to='products/photo', blank=True, null=True, verbose_name='Фото',
                             help_text='Загрузите фото')
     category = models.ForeignKey(Category,
                                  on_delete=models.SET_NULL,
