@@ -1,0 +1,18 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 6,
+    "fields": {
+      "name": "Молочка",
+      "description": "Молочные продукты"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 7,
+    "fields": {
+      "name": "Выпечка",
+      "description": "Хлобобулочные"
+    }
+  }
+]
