@@ -7,7 +7,10 @@ from catalog.views import   home, \
                             CataDetailListView,\
                             ProductCreateView,\
                             ProductUpdateView, \
-                            ProductDeleteView
+                            ProductDeleteView, \
+                            CategoryListView, \
+                            CategoryCreateView, \
+                            CategoryUpdateView
 
 app_name = CatalogConfig.name
 
@@ -19,4 +22,8 @@ urlpatterns = [
     path('catalog/create', ProductCreateView.as_view(), name='product_create'),
     path('catalog/<int:pk>/update', ProductUpdateView.as_view(), name='product_update'),
     path('catalog/<int:pk>/delete', ProductDeleteView.as_view(), name='product_delete'),
+
+    path('catalog/category/', CategoryListView.as_view(), name='category_list'),
+    path('catalog/category/new', CategoryCreateView.as_view(), name='category_create'),
+    path('catalog/category/<int:pk>/update', CategoryUpdateView.as_view(), name='category_update'),
 ]

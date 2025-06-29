@@ -4,9 +4,16 @@ from django.db import models
 class Category(models.Model):
     """Класс Категория"""
     # название, описание
-    name = models.CharField(max_length=100, verbose_name='Название', help_text='Введите название категории')
-    description = models.TextField(blank=True, null=True, max_length=100, verbose_name='Описание',
-                                   help_text='Введите описание категории')
+    name = models.CharField(
+        max_length=100,
+        verbose_name='Название',
+        help_text='Введите название категории')
+    description = models.TextField(
+        blank=True,
+        null=True,
+        max_length=100,
+        verbose_name='Описание',
+        help_text='Введите описание категории')
 
     class Meta:
         verbose_name = 'Категория'
@@ -36,7 +43,8 @@ class Product(models.Model):
         null=True,
         verbose_name='Фото',
         help_text='Загрузите фото')
-    category = models.ForeignKey(Category,
+    category = models.ForeignKey(
+        Category,
         on_delete=models.SET_NULL,
         default=None,
         verbose_name='Категория',
