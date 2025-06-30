@@ -7,13 +7,13 @@ class Category(models.Model):
     name = models.CharField(
         max_length=100,
         verbose_name='Название',
-        help_text='Введите название категории')
+        # help_text='Введите название категории'
+    )
     description = models.TextField(
         blank=True,
         null=True,
         max_length=100,
-        verbose_name='Описание',
-        help_text='Введите описание категории')
+        verbose_name='Описание')
 
     class Meta:
         verbose_name = 'Категория'
@@ -29,45 +29,38 @@ class Product(models.Model):
     # наименование, описание, изображение, категория, цена за покупку, дата создания, дата последнего изменения
     name = models.CharField(
         max_length=100,
-        verbose_name='Название',
-        help_text='Введите название продукта')
+        verbose_name='Название')
     description = models.TextField(
         blank=True,
         null=True,
         max_length=100,
-        verbose_name='Описание',
-        help_text='Введите описание продукта')
+        verbose_name='Описание')
     png = models.ImageField(
         upload_to='products/photo',
         blank=True,
         null=True,
-        verbose_name='Фото',
-        help_text='Загрузите фото')
+        verbose_name='Фото')
     category = models.ForeignKey(
         Category,
         on_delete=models.SET_NULL,
         default=None,
         verbose_name='Категория',
-        help_text='Введите категорию продукта',
         null=True,
-        blank=True)
+        blank=True,
+        help_text='Выберите название Категории')
     price = models.FloatField(
         max_length=100,
-        verbose_name='Цена',
-        help_text='Введите цену продукта')
+        verbose_name='Цена')
     created_at = models.DateField(
         auto_now=False,
         auto_now_add=False,
-        verbose_name='Дата создания',
-        help_text='Введите  продукта')
+        verbose_name='Дата создания')
     updated_at = models.DateField(
         auto_now=False,
         auto_now_add=False,
-        verbose_name='Дата последнего изменения',
-        help_text='Введите  продукта')
+        verbose_name='Дата последнего изменения')
     views_counter = models.PositiveIntegerField(
         verbose_name="Счетчик просмотров",
-        help_text="Укажите количество просмотров",
         default=0)
 
 

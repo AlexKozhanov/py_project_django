@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.views.generic import ListView, \
                                  DetailView, \
@@ -27,13 +27,13 @@ def contacts(request):
     return render(request, 'catalog/contacts.html')
 
 
-class CatalogListView(ListView):
+class ProductListView(ListView):
     model = Product
     # app_name/<modul_name>_<action>
     # catalog/product_detail.html
 
 
-class CataDetailListView(DetailView):
+class ProductDetailListView(DetailView):
     model = Product
 
     def get_object(self, queryset=None):
@@ -94,6 +94,16 @@ class CategoryListView(ListView):
     model = Category
     template_name = 'catalog/category_list.html'
     context_object_name = 'categories'
+
+
+class CategoryDetailListView(DetailView):
+    model = Product
+    template_name = 'catalog/category_detail.html'
+    success_url = reverse_lazy('catalog:category_list')
+
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        return self.object
 
 
 class CategoryCreateView(CreateView):

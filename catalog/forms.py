@@ -1,8 +1,10 @@
 from django.forms import ModelForm, \
-                         BooleanField
+    BooleanField
 from django.core.exceptions import ValidationError
 
 from catalog.models import Product, Category
+
+cuss = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
 
 
 class ProductForm(ModelForm):
@@ -16,16 +18,52 @@ class ProductForm(ModelForm):
             'class': 'form-control',
             'placeholder': 'Введите название продуктааа'
         })
+        self.fields['description'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Введите описание продуктааа'
+        })
+        self.fields['png'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Приложите картинку продуктааа'
+        })
+        self.fields['category'].widget.attrs.update({
+            'class': 'form-control',
+            # 'placeholder': 'Выберите название Категории'
+        })
+        self.fields['price'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Введите цену продуктааа'
+        })
+        self.fields['created_at'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Введите дату создания продуктааа'
+        })
+        self.fields['updated_at'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Введите дату редактирования продуктааа'
+        })
 
-    def clean(self):
-        cleaned_data = super().clean()
-        name = cleaned_data.get('name')
-        category = cleaned_data.get('category')
+    def clean_name(self):
+        name = self.cleaned_data.get('name')
+        lowered = name.lower()
+        for word in cuss:
+            if word in lowered:
+                raise ValidationError('Имя Продукта запрещено')
+        return name
 
-        # if Product.objects.filter(name=name, category=category).exist():
-        if Product.objects.get(name=name, category=category):
-            raise ValidationError('Продукт с таким Именем и Категорией уже существует')
-        return cleaned_data
+    def clean_description(self):
+        description = self.cleaned_data.get('description', '')
+        lowered = description.lower()
+        for word in cuss:
+            if word in lowered:
+                raise ValidationError('Описание Продукта запрещено')
+        return description
+
+    def clean_price(self):
+        price = self.cleaned_data.get('price')
+        if price <= 0:
+            raise ValidationError('Цена не может быть отрицательной')
+        return price
 
 
 class CategoryForm(ModelForm):
@@ -52,6 +90,23 @@ class CategoryForm(ModelForm):
         if name and description and name == description:
             self.add_error(field='name', error='Имя и описание не могут иметь одинаковое значение')
 
+    def clean_name(self):
+        name = self.cleaned_data.get('name')
+        lowered = name.lower()
+        for word in cuss:
+            if word in lowered:
+                raise ValidationError('Имя Категории запрещено')
+        return name
+
+    def clean_description(self):
+        description = self.cleaned_data.get('description', '')
+        lowered = description.lower()
+        # if Product.objects.filter(name=name, category=category).exist():
+        for word in cuss:
+            if word in lowered:
+                raise ValidationError('Описание Категории запрещено')
+        return description
+
     # def clean_"имя_атрибута_класса"(self):
-    # Дочтать поле значения
+    # Достать поле значения
     # Проверить его
