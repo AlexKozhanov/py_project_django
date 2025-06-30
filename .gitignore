@@ -1,4 +1,11 @@
-# gitignore file for django project
+### main template
+/venv/
+/.idea/
+.idea/
+myenv/
+database.ini
+
+### gitignore file for django project
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
