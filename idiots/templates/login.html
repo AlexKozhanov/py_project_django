@@ -1,0 +1,22 @@
+{% extends 'catalog/template.html' %}
+{% block content %}
+<!-- Раздел2 Категории -->
+<div class="container px-4 py-5" id="featured-3"> <!-- container с текстами -->
+    <h2 class="pb-2 border-bottom text-center">Form</h2>
+    <p class="lead text-center">Форма для работы</p>
+
+    <form class="row" method="post" enctype="multipart/form-data"> <!-- Разделять формы -->
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    Войти
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
