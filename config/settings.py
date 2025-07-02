@@ -101,3 +101,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'madia')
 # AUTH_USER_MODEL = 'YourAppName.YourClassName'
 # AUTH_USER_MODEL = 'users.User'
 AUTH_USER_MODEL = 'idiots.Idiots'
+
+#Подключение почты Яндекс
+# Адрес почтового сервера — smtp.yandex.ru.
+# Защита соединения — SSL.
+# Порт — 465. Если почтовый клиент начинает соединение без шифрования — 587.
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'iVasya2033@yandex.ru'
+EMAIL_HOST_PASSWORD = 'znwlirhdwkdnopwb'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
