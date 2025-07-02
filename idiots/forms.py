@@ -1,13 +1,33 @@
 from django.forms import ModelForm
+from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from idiots.models import Idiots
 
-class IdiotsRegisterForm(UserCreationForm):
+
+class IdiotsCreationForm(UserCreationForm):
+    phone_number = forms.CharField(
+        max_length=35,
+        # verbose_name='Телефон',
+        required=False,
+        help_text='Номер Телефона')
+    username = forms.CharField(
+        max_length=50,
+        # verbose_name='Имя',
+        required=True)
+    usable_password = None
+
+
     class Meta:
         model = Idiots
         # exclude = ("views_counter",)
-        fields = ('email', 'password1', 'password1')
+        fields = ('email',
+                  'username',
+                  'first_name',
+                  'last_name',
+                  'phone_number',
+                  'password1',
+                  'password2')
 
     # def __init__(self, *args, **kwargs):
     #     super(ProductForm, self).__init__(*args, **kwargs)
@@ -40,11 +60,8 @@ class IdiotsRegisterForm(UserCreationForm):
     #         'placeholder': 'Введите дату редактирования продуктааа'
     #     })
 
-    # def clean_name(self):
-    #     name = self.cleaned_data.get('name')
-    #     lowered = name.lower()
-    #     for word in cuss:
-    #         if word in lowered:
-    #             raise ValidationError('Имя Продукта запрещено')
-    #     return name
-
+    def clean_phone_number(self):
+        phone_number = self.cleaned_data.get('phone_number')
+        if phone_number and not phone_number.isdigit():
+            raise forms.ValidationError('Номер должен состоять только из цифр')
+        return phone_number
