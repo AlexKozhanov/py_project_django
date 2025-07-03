@@ -4,6 +4,12 @@ from django.db import models
 
 class Idiots(AbstractUser):
     username = None
+    # username = models.CharField(
+    #     max_length=50,
+    #     verbose_name='username',
+    #     blank=False,
+    #     null=False,
+    #     help_text='username')
     email = models.EmailField(
         unique=True,
         verbose_name='Email')

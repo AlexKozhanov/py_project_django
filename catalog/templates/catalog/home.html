@@ -9,9 +9,9 @@
         <div class="card">
           <h5 class="card-header text-center">Магазин</h5>
           {% if user.is_authenticated %}
-            <p>Добро пожаловать, {{ user.username }}</p>
+            <p>Добро пожаловать, {{ user.first_name }}!</p>
           {% else %}
-            <p>Добро пожаловать на сайт</p>
+            <p>Добро пожаловать на сайт!</p>
           {% endif %}
         </div>
         <div class="card">

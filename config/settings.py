@@ -114,3 +114,6 @@ EMAIL_USE_SSL = True
 EMAIL_HOST_USER = 'iVasya2033@yandex.ru'
 EMAIL_HOST_PASSWORD = 'znwlirhdwkdnopwb'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+LOGIN_REDIRECT_URL = 'catalog:home'
+LOGIN_URL = 'idiots:login'

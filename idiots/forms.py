@@ -6,10 +6,10 @@ from idiots.models import Idiots
 # avatar, country, date_joined, email, first_name, groups, id, is_active, is_staff, is_superuser, last_login, last_name, password, phone_number, tg_name, user_permissions
 
 class IdiotsCreationForm(UserCreationForm):
-    username = forms.CharField(
-        max_length=50,
-        # verbose_name='Имя',
-        required=True)
+    # username = forms.CharField(
+    #     max_length=50,
+    #     # verbose_name='Имя',
+    #     required=True)
     email = forms.EmailField(
         # unique=True,
         required=False,
@@ -49,7 +49,7 @@ class IdiotsCreationForm(UserCreationForm):
         #           'password1',
         #           'password2')
         fields = (
-            'username',
+            # 'username',
             'email',
             'first_name',
             'last_name',
@@ -63,10 +63,10 @@ class IdiotsCreationForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super(IdiotsCreationForm, self).__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': 'Введите логииин'
-        })
+        # self.fields['username'].widget.attrs.update({
+        #     'class': 'form-control',
+        #     'placeholder': 'Введите логииин'
+        # })
         self.fields['email'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': 'Приложите emaiiil'

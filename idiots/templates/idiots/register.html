@@ -11,10 +11,12 @@
         <div class="col-6">
                 <form method="post">
                     {% csrf_token %}
+                    {{ form.non_field_errors }}
                     {{ form.as_p }}
                     <button type="submit" class="btn btn-primary">
                         Регистрация
                     </button>
+                    <a href="{% url 'catalog:home' %}">Отмена</a>
                 </form>
 <!--            <div class="card">-->
 <!--                <div class="card-body">-->

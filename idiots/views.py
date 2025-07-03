@@ -1,13 +1,14 @@
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.core.mail import send_mail
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import IdiotsCreationForm
 
 
 class RegisterView(CreateView):
-    template_name = 'idiots/login.html'
+    template_name = 'idiots/register.html'
     form_class = IdiotsCreationForm
-    success_url = reverse_lazy('catalog/home.html')
+    success_url = reverse_lazy('catalog:home')
 
     def form_valid(self, form):
         idiot = form.save()

@@ -7,6 +7,7 @@ from django.views.generic import ListView, \
                                  DeleteView
 from django.urls import reverse_lazy, reverse
 from django.forms import inlineformset_factory
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from catalog.forms import ProductForm, CategoryForm
 from catalog.models import Product, Category
@@ -43,7 +44,7 @@ class ProductDetailListView(DetailView):
         return self.object
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     template_name = 'catalog/product_form.html'
@@ -51,7 +52,7 @@ class ProductCreateView(CreateView):
     # success_url = reverse_lazy('<Название приложения>:<Название url>')
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     template_name = 'catalog/product_form.html'
@@ -106,14 +107,14 @@ class CategoryDetailListView(DetailView):
         return self.object
 
 
-class CategoryCreateView(CreateView):
+class CategoryCreateView(LoginRequiredMixin, CreateView):
     model = Category
     form_class = CategoryForm
     template_name = 'catalog/category_form.html'
     success_url = reverse_lazy('catalog:category_list')
 
 
-class CategoryUpdateView(UpdateView):
+class CategoryUpdateView(LoginRequiredMixin, UpdateView):
     model = Category
     form_class = CategoryForm
     template_name = 'catalog/category_form.html'
