@@ -1,5 +1,7 @@
 from django.db import models
 
+from idiots.models import Idiots
+
 
 class Category(models.Model):
     """Класс Категория"""
@@ -26,7 +28,8 @@ class Category(models.Model):
 
 class Product(models.Model):
     """Класс Продукты"""
-    # наименование, описание, изображение, категория, цена за покупку, дата создания, дата последнего изменения
+    # наименование, описание, изображение, категория, цена за покупку,
+    # дата создания, дата последнего изменения, статус публикации
     name = models.CharField(
         max_length=100,
         verbose_name='Название')
@@ -62,6 +65,20 @@ class Product(models.Model):
     views_counter = models.PositiveIntegerField(
         verbose_name="Счетчик просмотров",
         default=0)
+    publication_status = models.BooleanField(
+        verbose_name='Статус публикации',
+        default=False,
+        null=True,
+        blank=True,
+        help_text='Выберите статус публикации продукта')
+    owner = models.ForeignKey(
+        Idiots,
+        on_delete=models.CASCADE,
+        default=None,
+        verbose_name='Владелец',
+        null=True,
+        blank=True,
+        help_text='Выберите владельца продукта')
 
 
     class Meta:

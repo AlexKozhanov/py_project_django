@@ -1,16 +1,36 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-from django.views.generic import ListView, \
-                                 DetailView, \
-                                 CreateView, \
-                                 UpdateView, \
-                                 DeleteView
 from django.urls import reverse_lazy, reverse
 from django.forms import inlineformset_factory
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.http import HttpResponseForbidden
+from django.contrib.auth.mixins import \
+    LoginRequiredMixin, \
+    PermissionRequiredMixin
+from django.views.generic import \
+    ListView, \
+    DetailView, \
+    CreateView, \
+    UpdateView, \
+    DeleteView, \
+    View
 
 from catalog.forms import ProductForm, CategoryForm
 from catalog.models import Product, Category
+
+
+# class PublicationStatusProductView(LoginRequiredMixin, View):
+#     def post(self, request, product_id):
+#         product = get_object_or_404(Product, id=product_id)
+#
+#         if not request.user.has_perm('catalog.can_unpublish_product'):
+#             return HttpResponseForbidden(
+#                 'У вас нет права для - отмены статуса публикации продукта'
+#             )
+#
+#         product.publication_status = request.POST.get('publication_status')
+#         product.save()
+#
+#         return redirect('catalog:product_detail', product_id=product_id)
 
 
 def home(request):
@@ -51,7 +71,7 @@ class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView)
     template_name = 'catalog/product_form.html'
     success_url = reverse_lazy('catalog:product_list')
     # success_url = reverse_lazy('<Название приложения>:<Название url>')
-    permission_required = 'catalog.create_product'
+    permission_required = 'catalog.add_product'
 
 
 class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
@@ -63,30 +83,6 @@ class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView)
 
     def get_success_url(self):
         return reverse('catalog:product_detail', args=[self.kwargs.get('pk')])
-
-    # def get_context_data(self, **kwargs):
-    #     context_data = super().get_context_data(**kwargs)
-    #     ProductFormet = inlineformset_factory(
-    #         parent_model=Category,
-    #         model=Product,
-    #         form=CategoryForm,
-    #         extra=1)
-    #     if self.request.method == 'POST':
-    #         context_data["formset"] = ProductFormet(self.request.POST, instance=self.object)
-    #     else:
-    #         context_data["formset"] = ProductFormet(instance=self.object)
-    #     return context_data
-    #
-    # def form_valid(self, form):
-    #     context_data = self.get_context_data()
-    #     formset = context_data["formset"]
-    #     if form.is_valid() and formset.is_valid():
-    #         self.object = form.save()
-    #         formset.instance = self.object
-    #         formset.save()
-    #         return super().form_valid(form)
-    #     else:
-    #         return self.render_to_response(self.get_context_data(form=form, formset=formset))
 
 
 class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
