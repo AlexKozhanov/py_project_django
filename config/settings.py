@@ -14,7 +14,7 @@ DEBUG = True if os.getenv('DEBUG') == "True" else False
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -90,11 +90,13 @@ USE_I18N = True
 
 USE_TZ = True
 
+#Add static
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+#Add media
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'madia')
 

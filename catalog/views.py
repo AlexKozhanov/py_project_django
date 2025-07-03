@@ -7,7 +7,7 @@ from django.views.generic import ListView, \
                                  DeleteView
 from django.urls import reverse_lazy, reverse
 from django.forms import inlineformset_factory
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 from catalog.forms import ProductForm, CategoryForm
 from catalog.models import Product, Category
@@ -28,13 +28,14 @@ def contacts(request):
     return render(request, 'catalog/contacts.html')
 
 
-class ProductListView(ListView):
+class ProductListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Product
     # app_name/<modul_name>_<action>
     # catalog/product_detail.html
+    permission_required = 'catalog.view_product'
 
 
-class ProductDetailListView(DetailView):
+class ProductDetailListView(LoginRequiredMixin, DetailView):
     model = Product
 
     def get_object(self, queryset=None):
@@ -44,19 +45,21 @@ class ProductDetailListView(DetailView):
         return self.object
 
 
-class ProductCreateView(LoginRequiredMixin, CreateView):
+class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     template_name = 'catalog/product_form.html'
     success_url = reverse_lazy('catalog:product_list')
     # success_url = reverse_lazy('<Название приложения>:<Название url>')
+    permission_required = 'catalog.create_product'
 
 
-class ProductUpdateView(LoginRequiredMixin, UpdateView):
+class ProductUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     template_name = 'catalog/product_form.html'
     success_url = reverse_lazy('catalog:product_list')
+    permission_required = 'catalog.change_product'
 
     def get_success_url(self):
         return reverse('catalog:product_detail', args=[self.kwargs.get('pk')])
@@ -86,18 +89,20 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     #         return self.render_to_response(self.get_context_data(form=form, formset=formset))
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:product_list')
+    permission_required = 'catalog.delete_product'
 
 
-class CategoryListView(ListView):
+class CategoryListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Category
     template_name = 'catalog/category_list.html'
     context_object_name = 'categories'
+    permission_required = 'catalog.view_category'
 
 
-class CategoryDetailListView(DetailView):
+class CategoryDetailListView(LoginRequiredMixin, DetailView):
     model = Product
     template_name = 'catalog/category_detail.html'
     success_url = reverse_lazy('catalog:category_list')
@@ -107,18 +112,20 @@ class CategoryDetailListView(DetailView):
         return self.object
 
 
-class CategoryCreateView(LoginRequiredMixin, CreateView):
+class CategoryCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Category
     form_class = CategoryForm
     template_name = 'catalog/category_form.html'
     success_url = reverse_lazy('catalog:category_list')
+    permission_required = 'catalog.create_category'
 
 
-class CategoryUpdateView(LoginRequiredMixin, UpdateView):
+class CategoryUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Category
     form_class = CategoryForm
     template_name = 'catalog/category_form.html'
     success_url = reverse_lazy('catalog:category_list')
+    permission_required = 'catalog.change_category'
 
     # def get_success_url(self):
     #     return reverse('catalog:product_detail', args=[self.kwargs.get('pk')])

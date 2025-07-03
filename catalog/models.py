@@ -68,6 +68,14 @@ class Product(models.Model):
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
         ordering = ['name', 'price', 'created_at', 'updated_at']
+        #permissions = [('как будет сохранено'),('как будет выглядеть в панели администратора'),]
+        #permissions = [('name_my_permission', 'Name my permission'),]
+
+    #      ГРУППА - products moderator
+    #     Кастомная роль - can_unpublish_product — может отменять публикацию продукта
+        permissions = [
+            ('can_unpublish_product', 'Can unpublish product'),
+        ]
 
     def __str__(self):
         return self.name
