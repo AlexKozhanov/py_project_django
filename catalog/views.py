@@ -15,8 +15,14 @@ from django.views.generic import \
     DeleteView, \
     View
 
+#CACHE
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
+from django.core.cache import cache
+
 from catalog.forms import ProductForm, ProductModeratorForm, CategoryForm
 from catalog.models import Product, Category
+from catalog.services import get_products_in_category
 
 
 # class PublicationStatusProductView(LoginRequiredMixin, View):
@@ -48,14 +54,14 @@ def contacts(request):
             f"Спасибо, {name}! Сообщение получено с текстом '{text}'. Мы свяжемся с вами по почте {mail}")
     return render(request, 'catalog/contacts.html')
 
-
+@method_decorator(cache_page(60 * 15), name='dispatch')
 class ProductListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Product
     # app_name/<modul_name>_<action>
     # catalog/product_detail.html
     permission_required = 'catalog.view_product'
 
-
+@method_decorator(cache_page(60 * 15), name='dispatch')
 class ProductDetailListView(LoginRequiredMixin, DetailView):
     model = Product
 
@@ -115,6 +121,13 @@ class CategoryListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     context_object_name = 'categories'
     permission_required = 'catalog.view_category'
 
+    def get_queryset(self):
+        queryset = cache.get('category_queryset')
+        if not queryset:
+            queryset = super().get_queryset()
+            cache.set('category_queryset', queryset, 60 * 15)
+        return queryset
+
 
 class CategoryDetailListView(LoginRequiredMixin, DetailView):
     model = Product
@@ -143,3 +156,18 @@ class CategoryUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView
 
     # def get_success_url(self):
     #     return reverse('catalog:product_detail', args=[self.kwargs.get('pk')])
+
+
+class ProductByCategoryListView(ListView):
+    template_name = 'catalog/category_products.html'
+    context_object_name = 'productsbycategory'
+
+    def get_queryset(self):
+        category_id = self.kwargs['category_id']
+        return get_products_in_category(category_id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category_id = self.kwargs['category_id']
+        context['category'] = Category.objects.get(pk=category_id)
+        return context

@@ -20,7 +20,7 @@
                         <div class="btn-group">
                             <a class="btn btn-primary" href="{% url 'catalog:category_detail' object.pk %}" role="button">Подробнее</a>
                             <a class="btn btn-primary" href="{% url 'catalog:category_update' object.pk %}" role="button">Редактировать</a>
-                            <a class="btn btn-primary" href="#" role="button">Удалить</a>
+                            <a class="btn btn-primary" href="{% url 'catalog:category_products' object.id %}" >Посмотреть продукты</a>
                         </div>
                     </div>
                 </div>
