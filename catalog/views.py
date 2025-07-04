@@ -4,23 +4,19 @@ from django.views.generic import    ListView,\
                                     DetailView,\
                                     CreateView,\
                                     UpdateView,\
-                                    DeleteView
+                                    DeleteView, \
+                                    TemplateView
 from django.urls import reverse_lazy, reverse
 
 from catalog.models import Product
 
 
-def home(request):
-    return render(request, 'catalog/home.html')
+class Home(TemplateView):
+    template_name = 'catalog/home.html'
 
-def contacts(request):
-    if request.method == "POST":
-        mail = request.POST.get("mail")
-        name = request.POST.get("name")
-        text = request.POST.get("text")
 
-        return HttpResponse(f"Спасибо, {name}! Сообщение получено с текстом '{text}'. Мы свяжемся с вами по почте {mail}")
-    return render(request, 'catalog/contacts.html')
+class Contacts(TemplateView):
+    template_name = 'catalog/contacts.html'
 
 class CatalogListView(ListView):
     model = Product
