@@ -79,7 +79,11 @@
         <div class="dropdown">
             <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="/static/img/cat.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
+                {% if user.is_authenticated %}
+                <strong>{{ user.first_name }}</strong>
+                {% else %}
                 <strong>Пользователь</strong>
+                {% endif %}
             </a>
                 <ul class="dropdown-menu text-small shadow">
                     {% if user.is_authenticated %}

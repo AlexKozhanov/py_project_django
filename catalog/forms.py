@@ -110,3 +110,10 @@ class CategoryForm(ModelForm):
     # def clean_"имя_атрибута_класса"(self):
     # Достать поле значения
     # Проверить его
+
+
+class ProductModeratorForm(ModelForm):
+    class Meta:
+        model = Product
+        # exclude = ("views_counter",) # всё кроме
+        fields = ("publication_status",) # перечисленные поля
